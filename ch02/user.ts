@@ -1,13 +1,5 @@
 export class User {
-  firstName: string = '';
-  lastName: string = '';
-  private isActive: boolean = false;
-
-  constructor(firstName: string, lastName: string, isActive: boolean = true) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.isActive = isActive;
-  }
+  constructor(private firstName: string, private lastName: string, private isActive: boolean = true) {}
 
   getFullname(): string {
     return `${this.firstName} ${this.lastName}`;
