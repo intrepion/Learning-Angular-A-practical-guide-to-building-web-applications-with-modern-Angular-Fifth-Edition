@@ -1,19 +1,19 @@
 export class User {
-  firstName = '';
-  lastName = '';
-  #isActive = false;
+  firstName: string = '';
+  lastName: string = '';
+  private isActive: boolean = false;
 
-  constructor(firstName, lastName, isActive = true) {
+  constructor(firstName: string, lastName: string, isActive: boolean = true) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.#isActive = isActive;
+    this.isActive = isActive;
   }
 
-  getFullname() {
+  getFullname(): string {
     return `${this.firstName} ${this.lastName}`;
   }
 
-  get active() {
-    return this.#isActive;
+  get active(): boolean {
+    return this.isActive;
   }
 }
