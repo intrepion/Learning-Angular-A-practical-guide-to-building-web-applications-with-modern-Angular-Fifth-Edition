@@ -1,1 +1,1 @@
-var title = 'Hello TypeScript!';
+const title = 'Hello TypeScript!';
