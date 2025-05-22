@@ -1,9 +1,9 @@
 import { User } from './user';
 
 class Customer extends User {
-  taxNumber = '';
+  taxNumber: number;
 
-  constructor(firstName, lastName) {
+  constructor(firstName: string, lastName: string) {
     super(firstName, lastName);
   }
 }
