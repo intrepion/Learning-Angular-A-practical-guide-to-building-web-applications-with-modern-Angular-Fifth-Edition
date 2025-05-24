@@ -1,1 +1,9 @@
-<p>product-list works!</p>
+@if (products.length > 0) {
+  <h1>Products ({{products.length}})</h1>
+} @else if (products.length === 100) {
+  <span>
+    Click <a>Load More</a> to see more products
+  </span>
+} @else {
+  <p>No products found!</p>
+}
