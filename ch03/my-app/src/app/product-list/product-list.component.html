@@ -4,7 +4,14 @@
 
 <ul class="pill-group">
   @for (product of products; track product.id; let i = $index) {
-    <li class="pill">{{i+1}}. {{product.title}}</li>
+    <li class="pill">
+      @switch (product.title) {
+        @case ('Keyboard') { ⌨️ }
+        @case ('Microphone') { 🎙️ }
+        @default { 🏷️ }
+      }
+      {{product.title}}
+    </li>
   } @empty {
     <p>No products found!</p>
   }
