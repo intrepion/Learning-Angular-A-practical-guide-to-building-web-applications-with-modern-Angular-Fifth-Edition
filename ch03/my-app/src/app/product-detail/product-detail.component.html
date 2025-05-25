@@ -1,1 +1,7 @@
-<p>product-detail works!</p>
+<p>You selected:
+  @if (product()) {
+    <strong>{{product()!.title}}</strong>
+  } @else {
+    <strong>Nothing</strong>
+  }
+</p>

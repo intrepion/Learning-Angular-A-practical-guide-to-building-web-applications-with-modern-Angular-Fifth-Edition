@@ -1,12 +1,6 @@
 <h1>({{products.length}}) Products</h1>
 
-<p>You selected:
-@if (selectedProduct) {
-  <strong>{{selectedProduct.title}}</strong>
-} @else {
-  <strong>Nothing</strong>
-}
-</p>
+<app-product-detail [product]="selectedProduct"></app-product-detail>
 
 <ul class="pill-group">
   @for (product of products; track product.id; let i = $index) {
