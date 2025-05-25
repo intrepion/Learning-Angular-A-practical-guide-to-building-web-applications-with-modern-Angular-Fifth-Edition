@@ -1,6 +1,9 @@
 <h1>({{products.length}}) Products</h1>
 
-<app-product-detail [product]="selectedProduct"></app-product-detail>
+<app-product-detail
+  [product]="selectedProduct"
+  (added)="onAdded()"
+></app-product-detail>
 
 <ul class="pill-group">
   @for (product of products; track product.id; let i = $index) {
