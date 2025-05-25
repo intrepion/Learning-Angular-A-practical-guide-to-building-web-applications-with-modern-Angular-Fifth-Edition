@@ -1,11 +1,12 @@
-import { Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { Product } from '../product'; 
 
 @Component({
   selector: 'app-product-detail',
   imports: [],
   templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.css'
+  styleUrl: './product-detail.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ProductDetailComponent {
@@ -15,5 +16,9 @@ export class ProductDetailComponent {
 
   addToCart() {
     this.added.emit(this.product()!);
+  }
+
+  get productTitle() {
+    return this.product()!.title;
   }
 }
