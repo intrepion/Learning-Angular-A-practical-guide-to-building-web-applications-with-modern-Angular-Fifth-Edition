@@ -1,6 +1,7 @@
 <h1>({{products.length}}) Products</h1>
 
 <app-product-detail
+  #productDetail
   [product]="selectedProduct"
   (added)="onAdded($event)"
 ></app-product-detail>
