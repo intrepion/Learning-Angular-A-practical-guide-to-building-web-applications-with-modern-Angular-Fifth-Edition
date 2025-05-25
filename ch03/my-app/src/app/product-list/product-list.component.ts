@@ -14,4 +14,6 @@ export class ProductListComponent {
     { id: 3, title: 'Web camera' },
     { id: 4, title: 'Tablet' }
   ];
+
+  selectedProduct: Product | undefined;
 }
