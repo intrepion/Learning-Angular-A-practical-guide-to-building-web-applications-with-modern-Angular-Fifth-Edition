@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, input, OnDestroy, OnInit, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  output,
+  SimpleChanges,
+} from '@angular/core';
 import { Product } from '../product'; 
 
 @Component({
@@ -9,7 +19,7 @@ import { Product } from '../product';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ProductDetailComponent implements OnDestroy, OnInit {
+export class ProductDetailComponent implements OnChanges, OnDestroy, OnInit {
   constructor(destroyRef: DestroyRef) {
     console.log('Product:', this.product());
 
@@ -27,6 +37,16 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
 
   get productTitle() {
     return this.product()!.title;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const product = changes['product'];
+    if (!product.isFirstChange()) {
+      const oldValue = product.previousValue;
+      const newValue = product.currentValue;
+      console.log('Old value', oldValue);
+      console.log('New value', newValue);
+    }
   }
 
   ngOnDestroy(): void {
