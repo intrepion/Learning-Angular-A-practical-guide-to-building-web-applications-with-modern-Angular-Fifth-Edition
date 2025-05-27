@@ -1,17 +1,16 @@
-<div>
-
   @let selectedProduct = product()!;
 
   @if (selectedProduct) {
-    <p>You selected:
-      <strong>{{selectedProduct.title}}</strong>
-    </p>
-    <p>{{selectedProduct.price | currency:'EUR'}}</p>
-    <div class="pill-group">
-      @for (cat of selectedProduct.categories | keyvalue; track cat.key) {
-        <p class="pill">{{cat.value | lowercase}}</p>
-      }
+    <div>
+      <p>You selected:
+        <strong>{{selectedProduct.title}}</strong>
+      </p>
+      <p>{{selectedProduct.price | currency:'EUR'}}</p>
+      <div class="pill-group">
+        @for (cat of selectedProduct.categories | keyvalue; track cat.key) {
+          <p class="pill">{{cat.value | lowercase}}</p>
+        }
+      </div>
+      <button (click)="addToCart()">Add to cart</button>
     </div>
-    <button (click)="addToCart()">Add to cart</button>
   }
-</div>
