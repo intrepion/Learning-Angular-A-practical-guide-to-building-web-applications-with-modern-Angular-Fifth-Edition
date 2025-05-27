@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, viewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, viewChild } from '@angular/core';
 import { Product } from '../product';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { SortPipe } from '../sort.pipe';
@@ -12,11 +12,7 @@ import { ProductsService } from '../products.service';
 })
 
 export class ProductListComponent implements AfterViewInit, OnInit {
-  private productService: ProductsService;
-
-  constructor() {
-    this.productService = new ProductsService();
-  }
+  private productService = inject(ProductsService);
 
   productDetail = viewChild(ProductDetailComponent);
 
