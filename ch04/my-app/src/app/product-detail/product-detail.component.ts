@@ -1,3 +1,4 @@
+import { CommonModule, CurrencyPipe, KeyValuePipe, LowerCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,7 +14,7 @@ import { Product } from '../product';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [],
+  imports: [CommonModule, KeyValuePipe, CurrencyPipe, LowerCasePipe],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
