@@ -11,7 +11,9 @@ import { ProductViewComponent } from '../product-view/product-view.component';
   imports: [ProductDetailComponent, SortPipe, FavoritesComponent, ProductViewComponent],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css',
-  providers: [ProductsService],
+  providers: [
+    { provide: ProductsService, useClass: ProductsService },
+  ],
 })
 
 export class ProductListComponent implements AfterViewInit, OnInit {
