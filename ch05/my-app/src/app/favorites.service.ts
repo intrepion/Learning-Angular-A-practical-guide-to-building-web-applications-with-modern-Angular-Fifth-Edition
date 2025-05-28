@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Product } from './product';
+import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FavoritesService {
+export class FavoritesService extends ProductsService {
 
-  constructor() { }
+  constructor() {
+    super();
+  }
+
+  override getProducts(): Product[] {
+    return super.getProducts().slice(1, 3);
+  }
 }
