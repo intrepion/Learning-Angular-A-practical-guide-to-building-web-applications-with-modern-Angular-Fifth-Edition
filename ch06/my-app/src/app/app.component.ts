@@ -22,4 +22,27 @@ export class AppComponent {
   title = 'my-app';
 
   settings = inject(APP_SETTINGS);
+
+  constructor() {
+    this.onComplete().then(this.setTitle);
+  }
+
+  private setTitle = () => {
+    const timestamp = new Date();
+    this.title = `${this.settings.title} (${timestamp})`;
+  }
+
+  private changeTitle(callback: Function) {
+    setTimeout(() => {
+      callback();
+    }, 2000);
+  }
+
+  private onComplete() {
+    return new Promise<void>(resolve => {
+      setInterval(() => {
+        resolve();
+      }, 2000);
+    });
+  }
 }
