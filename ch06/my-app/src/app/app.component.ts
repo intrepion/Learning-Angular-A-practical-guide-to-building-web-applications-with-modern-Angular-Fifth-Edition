@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CopyrightDirective } from './copyright.directive';
 import { APP_SETTINGS, appSettings } from './app.settings';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +22,16 @@ import { APP_SETTINGS, appSettings } from './app.settings';
 export class AppComponent {
   title = 'my-app';
 
+  title$ = new Observable(observer => {
+      setInterval(() => {
+        observer.next(null);
+      }, 2000);
+  });
+
   settings = inject(APP_SETTINGS);
 
   constructor() {
-    this.onComplete().then(this.setTitle);
+    this.title$.subscribe(this.setTitle);
   }
 
   private setTitle = () => {
