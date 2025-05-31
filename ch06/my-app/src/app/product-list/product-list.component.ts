@@ -7,10 +7,18 @@ import { FavoritesComponent } from '../favorites/favorites.component';
 import { ProductViewComponent } from '../product-view/product-view.component';
 import { Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
-  imports: [ProductDetailComponent, SortPipe, FavoritesComponent, ProductViewComponent],
+  imports: [
+    AsyncPipe,
+    FavoritesComponent,
+    ProductDetailComponent,
+    ProductViewComponent,
+    SortPipe,
+  ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css',
   providers: [
@@ -23,20 +31,16 @@ export class ProductListComponent implements AfterViewInit, OnDestroy, OnInit {
 
   productDetail = viewChild(ProductDetailComponent);
 
-  products: Product[] = [];
+  products$: Observable<Product[]> | undefined;
 
   private productService = inject(ProductsService);
 
   private productsSub: Subscription | undefined;
 
-  selectedProduct: Product | undefined = this.products[0];
+  selectedProduct: Product | undefined;
 
   private getProducts() {
-    this.productsSub = this.productService.getProducts().pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(products => {
-      this.products = products;
-    });
+    this.products$ = this.productService.getProducts();
   }
 
   ngAfterViewInit(): void {
