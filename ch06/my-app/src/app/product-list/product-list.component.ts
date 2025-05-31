@@ -25,12 +25,18 @@ export class ProductListComponent implements AfterViewInit, OnInit {
 
   selectedProduct: Product | undefined = this.products[0];
 
+  private getProducts() {
+    this.productService.getProducts().subscribe(products => {
+      this.products = products;
+    });
+  }
+
   ngAfterViewInit(): void {
     console.log(this.productDetail()!.product());
   }
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
+    this.getProducts();
   }
 
   onAdded(product: Product) {
