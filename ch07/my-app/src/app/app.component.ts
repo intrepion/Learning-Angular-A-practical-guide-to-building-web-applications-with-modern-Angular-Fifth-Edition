@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CopyrightDirective } from './copyright.directive';
@@ -22,6 +22,10 @@ import { KeyLoggerComponent } from './key-logger/key-logger.component';
 })
 
 export class AppComponent {
+  currentDate = signal(new Date());
+
+  settings = inject(APP_SETTINGS);
+
   title = 'my-app';
 
   title$ = new Observable(observer => {
@@ -30,15 +34,13 @@ export class AppComponent {
       }, 2000);
   });
 
-  settings = inject(APP_SETTINGS);
-
   constructor() {
     this.title$.subscribe(this.setTitle);
   }
 
   private setTitle = () => {
-    const timestamp = new Date();
-    this.title = `${this.settings.title} (${timestamp})`;
+    this.currentDate.set(new Date());
+    this.title = `${this.settings.title} (${this.currentDate()})`;
   }
 
   private changeTitle(callback: Function) {
