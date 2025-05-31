@@ -1,0 +1,22 @@
+@let products = (products$ | async)!;
+
+<h1>({{products.length}}) Products</h1>
+
+<app-product-detail
+  #productDetail
+  [product]="selectedProduct"
+  (added)="onAdded($event)"
+></app-product-detail>
+
+<ul class="pill-group">
+  @for (product of products | sort; track product.id; let i = $index) {
+    <li class="pill" (click)="selectedProduct = product">
+      <app-product-view [id]="product.id"></app-product-view>
+    </li>
+  } @empty {
+    <p>No products found!</p>
+  }
+</ul>
+
+<h1>Favorites</h1>
+<app-favorites></app-favorites>
