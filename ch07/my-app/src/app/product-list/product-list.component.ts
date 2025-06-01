@@ -1,35 +1,34 @@
-import { AfterViewInit, Component, DestroyRef, inject, OnDestroy, OnInit, viewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnDestroy, OnInit, viewChild } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Observable, Subscription } from 'rxjs';
+import { FavoritesComponent } from '../favorites/favorites.component';
 import { Product } from '../product';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
-import { SortPipe } from '../sort.pipe';
-import { ProductsService } from '../products.service';
-import { FavoritesComponent } from '../favorites/favorites.component';
 import { ProductViewComponent } from '../product-view/product-view.component';
-import { Subscription } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { AsyncPipe } from '@angular/common';
-import { Observable } from 'rxjs';
+import { ProductsService } from '../products.service';
+import { SortPipe } from '../sort.pipe';
 
 @Component({
-  selector: 'app-product-list',
   imports: [
-    AsyncPipe,
     FavoritesComponent,
     ProductDetailComponent,
     ProductViewComponent,
     SortPipe,
   ],
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css',
   providers: [
     { provide: ProductsService, useClass: ProductsService },
   ],
+  selector: 'app-product-list',
+  styleUrl: './product-list.component.css',
+  templateUrl: './product-list.component.html',
 })
 
 export class ProductListComponent implements AfterViewInit, OnDestroy, OnInit {
-  private destroyRef = inject(DestroyRef);
-
   productDetail = viewChild(ProductDetailComponent);
+
+  products = toSignal(inject(ProductsService).getProducts(), {
+    initialValue: []
+  });
 
   products$: Observable<Product[]> | undefined;
 
@@ -51,11 +50,11 @@ export class ProductListComponent implements AfterViewInit, OnDestroy, OnInit {
     this.getProducts();
   }
 
-  onAdded(product: Product) {
-    alert(`${product.title} added to the cart!`);
-  }
-
   ngOnDestroy(): void {
     this.productsSub?.unsubscribe();
+  }
+
+  onAdded(product: Product) {
+    alert(`${product.title} added to the cart!`);
   }
 }

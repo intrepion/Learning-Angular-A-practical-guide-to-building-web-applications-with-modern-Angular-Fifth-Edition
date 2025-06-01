@@ -6,11 +6,11 @@ import {
   signal,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProductListComponent } from './product-list/product-list.component';
-import { CopyrightDirective } from './copyright.directive';
-import { APP_SETTINGS, appSettings } from './app.settings';
 import { Observable } from 'rxjs';
+import { APP_SETTINGS, appSettings } from './app.settings';
+import { CopyrightDirective } from './copyright.directive';
 import { KeyLoggerComponent } from './key-logger/key-logger.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 @Component({
   selector: 'app-root',
