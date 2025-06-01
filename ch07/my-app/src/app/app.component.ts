@@ -1,4 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  Signal,
+  signal,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CopyrightDirective } from './copyright.directive';
@@ -26,7 +32,7 @@ export class AppComponent {
 
   settings = inject(APP_SETTINGS);
 
-  title = 'my-app';
+  title: Signal<string> = signal('');
 
   title$ = new Observable(observer => {
       setInterval(() => {
@@ -36,11 +42,13 @@ export class AppComponent {
 
   constructor() {
     this.title$.subscribe(this.setTitle);
+    this.title = computed(() => {
+      return `${this.settings.title} (${this.currentDate()})`;
+    });
   }
 
   private setTitle = () => {
     this.currentDate.set(new Date());
-    this.title = `${this.settings.title} (${this.currentDate()})`;
   }
 
   private changeTitle(callback: Function) {
