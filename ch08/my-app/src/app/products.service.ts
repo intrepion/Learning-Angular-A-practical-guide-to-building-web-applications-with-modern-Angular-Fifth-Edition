@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, of, tap } from 'rxjs';
 import { APP_SETTINGS } from './app.settings';
@@ -37,15 +37,17 @@ export class ProductsService {
   }
 
   getProducts(): Observable<Product[]> {
-    const options = new HttpParams()
-      .set('limit', 10)
-      .set('page', 1);
+    const options = {
+      params: new HttpParams()
+        .set('limit', 10)
+        .set('page', 1),
+      headers: new HttpHeaders({ Authorization: 'myToken' })
+    };
 
-    return this.http.get<Product[]>(this.productsUrl, {
-      params: options
-    }).pipe(map(products => {
-      this.products = products;
-      return products;
+    return this.http.get<Product[]>(this.productsUrl, options)
+      .pipe(map(products => {
+        this.products = products;
+        return products;
       }));
   }
 
