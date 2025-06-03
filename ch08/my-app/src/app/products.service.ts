@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 import { APP_SETTINGS } from './app.settings';
 import { Product } from './product';
 
@@ -18,6 +18,15 @@ export class ProductsService {
       map(product => {
         this.products.push(product);
         return product;
+      })
+    );
+  }
+
+  deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.productsUrl}/${id}`).pipe(
+      tap(() => {
+        const index = this.products.findIndex(p => p.id === id);
+        this.products.splice(index, 1);
       })
     );
   }

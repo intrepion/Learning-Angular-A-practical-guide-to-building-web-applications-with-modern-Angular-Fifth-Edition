@@ -6,6 +6,7 @@
   #productDetail
   [id]="selectedProduct?.id"
   (added)="onAdded($event)"
+  (deleted)="selectedProduct = undefined"
 ></app-product-detail>
 
 <ul class="pill-group">

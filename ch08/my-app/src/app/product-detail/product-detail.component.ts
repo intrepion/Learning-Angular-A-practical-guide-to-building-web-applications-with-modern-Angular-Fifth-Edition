@@ -23,6 +23,8 @@ import { ProductsService } from '../products.service';
 export class ProductDetailComponent implements OnChanges, OnDestroy, OnInit {
   added = output<Product>();
   
+  deleted = output();
+
   id = input<number>();
 
   product$: Observable<Product> | undefined;
@@ -48,5 +50,11 @@ export class ProductDetailComponent implements OnChanges, OnDestroy, OnInit {
 
   ngOnInit(): void {
     console.log('Product:', this.product$);
+  }
+
+  remove(product: Product) {
+    this.productService.deleteProduct(product.id).subscribe(() => {
+      this.deleted.emit();
+    });
   }
 }
