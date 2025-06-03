@@ -1,8 +1,8 @@
-<h1>({{products().length}}) Products</h1>
+<h1>{{products().length}} Products</h1>
 
 <app-product-detail
   #productDetail
-  [product]="selectedProduct"
+  [id]="selectedProduct?.id"
   (added)="onAdded($event)"
 ></app-product-detail>
 

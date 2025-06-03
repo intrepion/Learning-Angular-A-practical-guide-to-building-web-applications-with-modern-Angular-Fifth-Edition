@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { Product } from './product';
 import { ProductsService } from './products.service';
-import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { map, Observable } from 'rxjs';
 export class FavoritesService extends ProductsService {
 
   constructor() {
-    super();
+    super(inject(HttpClient));
   }
 
   override getProducts(): Observable<Product[]> {

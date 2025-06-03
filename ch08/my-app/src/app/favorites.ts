@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { FavoritesService } from './favorites.service';
 import { ProductsService } from './products.service';
 
@@ -6,6 +8,6 @@ export function favoritesFactory(isFavorite: boolean) {
         if (isFavorite) {
             return new FavoritesService();
         }
-        return new ProductsService();
+        return new ProductsService(inject(HttpClient));
     };
 }

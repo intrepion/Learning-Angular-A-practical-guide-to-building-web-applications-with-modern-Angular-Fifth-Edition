@@ -1,59 +1,48 @@
-import { CommonModule, CurrencyPipe, KeyValuePipe, LowerCasePipe } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   input,
   OnChanges,
   OnDestroy,
   OnInit,
   output,
-  SimpleChanges,
 } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Product } from '../product';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [CommonModule, KeyValuePipe, CurrencyPipe, LowerCasePipe],
+  imports: [CommonModule, CurrencyPipe],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ProductDetailComponent implements OnChanges, OnDestroy, OnInit {
-  constructor(destroyRef: DestroyRef) {
-    console.log('Product:', this.product());
+  added = output<Product>();
+  
+  id = input<number>();
 
-    destroyRef.onDestroy(() => {
+  product$: Observable<Product> | undefined;
+
+  constructor(private productService: ProductsService) { }
+
+  addToCart() {
+    this.product$?.subscribe(product => {
+      this.added.emit(product);
     });
   }
 
-  product = input<Product>();
-
-  added = output<Product>();
-
-  addToCart() {
-    this.added.emit(this.product()!);
-  }
-
-  get productTitle() {
-    return this.product()!.title;
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    const product = changes['product'];
-    if (!product.isFirstChange()) {
-      const oldValue = product.previousValue;
-      const newValue = product.currentValue;
-      console.log('Old value', oldValue);
-      console.log('New value', newValue);
-    }
+  ngOnChanges(): void {
+    this.product$ = this.productService.getProduct(this.id()!);
   }
 
   ngOnDestroy(): void {
   }
 
   ngOnInit(): void {
-    console.log('Product:', this.product());
+    console.log('Product:', this.product$);
   }
 }
