@@ -35,6 +35,10 @@ export class ProductDetailComponent implements OnChanges, OnDestroy, OnInit {
     });
   }
 
+  changePrice(product: Product, price: string) {
+    this.productService.updateProduct(product.id, Number(price)).subscribe();
+  }
+
   ngOnChanges(): void {
     this.product$ = this.productService.getProduct(this.id()!);
   }

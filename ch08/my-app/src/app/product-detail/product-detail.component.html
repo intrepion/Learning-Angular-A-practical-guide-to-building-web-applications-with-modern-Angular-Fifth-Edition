@@ -6,6 +6,12 @@
         <strong>{{product.title}}</strong>
       </p>
       <p>{{product.price | currency:'EUR'}}</p>
+      <input placeholder="New price" #price type="number" />
+      <button
+        class="secondary"
+        (click)="changePrice(product, price.value)">
+        Change
+      </button>
       <div class="pill-group">
         <p class="pill">{{ product.category }}</p>
       </div>
