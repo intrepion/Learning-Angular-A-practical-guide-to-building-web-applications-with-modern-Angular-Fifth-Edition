@@ -13,6 +13,15 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
+  addProduct(newProduct: Partial<Product>): Observable<Product> {
+    return this.http.post<Product>(this.productsUrl, newProduct).pipe(
+      map(product => {
+        this.products.push(product);
+        return product;
+      })
+    );
+  }
+
   getProduct(id: number): Observable<Product> {
     const product = this.products.find(p => p.id === id);
     return of(product!);
