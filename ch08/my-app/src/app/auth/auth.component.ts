@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -7,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './auth.component.css'
 })
 export class AuthComponent {
+  constructor(public authService: AuthService) {}
 
+  login() {
+    this.authService.login('david_r', '3478*#54').subscribe();
+  }
+
+  logout() {
+    this.authService.logout();
+  }
 }

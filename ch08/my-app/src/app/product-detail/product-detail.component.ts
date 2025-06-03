@@ -9,6 +9,7 @@ import {
   output,
 } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth.service';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
 
@@ -29,7 +30,7 @@ export class ProductDetailComponent implements OnChanges, OnDestroy, OnInit {
 
   product$: Observable<Product> | undefined;
 
-  constructor(private productService: ProductsService) { }
+  constructor(private productService: ProductsService, public authService: AuthService) { }
 
   addToCart() {
     this.product$?.subscribe(product => {
