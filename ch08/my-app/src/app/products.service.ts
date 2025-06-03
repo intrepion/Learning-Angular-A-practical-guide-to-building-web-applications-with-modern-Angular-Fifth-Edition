@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { APP_SETTINGS } from './app.settings';
 import { Product } from './product';
 
@@ -9,10 +9,13 @@ import { Product } from './product';
 export class ProductsService {
   private productsUrl = inject(APP_SETTINGS).apiUrl + '/products';
 
+  private products: Product[] = [];
+
   constructor(private http: HttpClient) { }
 
   getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.productsUrl}/${id}`);
+    const product = this.products.find(p => p.id === id);
+    return of(product!);
   }
 
   getProducts(): Observable<Product[]> {
@@ -22,6 +25,9 @@ export class ProductsService {
 
     return this.http.get<Product[]>(this.productsUrl, {
       params: options
-    });
+    }).pipe(map(products => {
+      this.products = products;
+      return products;
+      }));
   }
 }
