@@ -1,16 +1,19 @@
 <header>
-  {{ settings.title }}
+  <h2>{{ settings.title }}</h2>
+  <span class="spacer"></span>
+  <div class="menu-links">
+    <a routerLink="/products">Products</a>
+    <a routerLink="/cart">My Cart</a>
+  </div>
   <app-auth />
 </header>
 
 <main class="main">
   <div class="content">
-    <app-product-list />
+    <router-outlet />
   </div>
 </main>
 
 <footer appCopyright> - v{{ settings.version }}</footer>
-
-<router-outlet />
 
 <app-key-logger [numeric]="true" />
