@@ -3,7 +3,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable, Subscription } from 'rxjs';
 import { FavoritesComponent } from '../favorites/favorites.component';
 import { Product } from '../product';
-import { ProductCreateComponent } from '../product-create/product-create.component';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ProductViewComponent } from '../product-view/product-view.component';
 import { ProductsService } from '../products.service';
@@ -12,7 +11,6 @@ import { SortPipe } from '../sort.pipe';
 @Component({
   imports: [
     FavoritesComponent,
-    ProductCreateComponent,
     ProductDetailComponent,
     ProductViewComponent,
     SortPipe,

@@ -4,9 +4,13 @@ import { ProductsService } from '../products.service';
 @Component({
   selector: 'app-product-create',
   imports: [],
+  providers: [
+    { provide: ProductsService, useClass: ProductsService },
+  ],
   templateUrl: './product-create.component.html',
   styleUrl: './product-create.component.css'
 })
+
 export class ProductCreateComponent {
   constructor(private productsService: ProductsService) {}
 
