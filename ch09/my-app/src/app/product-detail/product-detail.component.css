@@ -1,10 +1,13 @@
+:host {
+  width: 450px;
+}
+
 .button-group {
   align-items: start;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-
 
 .pill {
   --pill-accent: var(--gray-900);

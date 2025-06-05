@@ -15,17 +15,11 @@
   </a>
 </div>
 
-<app-product-detail
-  #productDetail
-  [id]="selectedProduct?.id"
-  (added)="onAdded($event)"
-  (deleted)="selectedProduct = undefined"
-></app-product-detail>
-
 <ul class="pill-group">
   @for (product of products() | sort; track product.id; let i = $index) {
     <li class="pill" (click)="selectedProduct = product">
       <app-product-view [id]="product.id"></app-product-view>
+      <a [routerLink]="[product.id]">{{product.title}}</a>
     </li>
   } @empty {
     <p>No products found!</p>

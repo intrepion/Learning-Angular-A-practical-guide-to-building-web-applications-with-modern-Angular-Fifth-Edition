@@ -3,25 +3,28 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
-  OnChanges,
   OnDestroy,
   OnInit,
   output,
 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, switchMap } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
 
 @Component({
-  selector: 'app-product-detail',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, CurrencyPipe],
-  templateUrl: './product-detail.component.html',
+    providers: [
+    { provide: ProductsService, useClass: ProductsService },
+  ],
+  selector: 'app-product-detail',
   styleUrl: './product-detail.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './product-detail.component.html',
 })
 
-export class ProductDetailComponent implements OnChanges, OnDestroy, OnInit {
+export class ProductDetailComponent implements OnDestroy, OnInit {
   added = output<Product>();
   
   deleted = output();
@@ -30,32 +33,36 @@ export class ProductDetailComponent implements OnChanges, OnDestroy, OnInit {
 
   product$: Observable<Product> | undefined;
 
-  constructor(private productService: ProductsService, public authService: AuthService) { }
+  constructor(
+    private productService: ProductsService,
+    public authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) { }
 
   addToCart() {
-    this.product$?.subscribe(product => {
-      this.added.emit(product);
-    });
   }
 
   changePrice(product: Product, price: string) {
-    this.productService.updateProduct(product.id, Number(price)).subscribe();
-  }
-
-  ngOnChanges(): void {
-    this.product$ = this.productService.getProduct(this.id()!);
+    this.productService.updateProduct(product.id, Number(price)).subscribe(() => {
+      this.router.navigate(['/products']);
+    });
   }
 
   ngOnDestroy(): void {
   }
 
   ngOnInit(): void {
-    console.log('Product:', this.product$);
+    this.product$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        return this.productService.getProduct(Number(params.get('id')));
+      })
+    );
   }
 
   remove(product: Product) {
     this.productService.deleteProduct(product.id).subscribe(() => {
-      this.deleted.emit();
+      this.router.navigate(['/products']);
     });
   }
 }

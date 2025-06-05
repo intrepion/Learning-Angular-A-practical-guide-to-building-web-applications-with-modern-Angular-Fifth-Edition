@@ -4,7 +4,6 @@ import { RouterLink } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { FavoritesComponent } from '../favorites/favorites.component';
 import { Product } from '../product';
-import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ProductViewComponent } from '../product-view/product-view.component';
 import { ProductsService } from '../products.service';
 import { SortPipe } from '../sort.pipe';
@@ -12,7 +11,6 @@ import { SortPipe } from '../sort.pipe';
 @Component({
   imports: [
     FavoritesComponent,
-    ProductDetailComponent,
     ProductViewComponent,
     RouterLink,
     SortPipe,
@@ -26,8 +24,6 @@ import { SortPipe } from '../sort.pipe';
 })
 
 export class ProductListComponent implements AfterViewInit, OnDestroy, OnInit {
-  productDetail = viewChild(ProductDetailComponent);
-
   products = toSignal(inject(ProductsService).getProducts(), {
     initialValue: []
   });
@@ -45,7 +41,6 @@ export class ProductListComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.productDetail()!.product$);
   }
 
   ngOnInit(): void {

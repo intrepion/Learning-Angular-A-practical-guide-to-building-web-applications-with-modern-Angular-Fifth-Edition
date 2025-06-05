@@ -33,7 +33,14 @@ export class ProductsService {
 
   getProduct(id: number): Observable<Product> {
     const product = this.products.find(p => p.id === id);
-    return of(product!);
+    if (product) {
+      return of(product);
+    }
+    return this.http.get<Product>(`${this.productsUrl}/${id}`).pipe(
+      tap(product => {
+        this.products.push(product);
+      })
+    );
   }
 
   getProducts(): Observable<Product[]> {
