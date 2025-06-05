@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, inject, OnDestroy, OnInit, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { FavoritesComponent } from '../favorites/favorites.component';
 import { Product } from '../product';
@@ -13,6 +14,7 @@ import { SortPipe } from '../sort.pipe';
     FavoritesComponent,
     ProductDetailComponent,
     ProductViewComponent,
+    RouterLink,
     SortPipe,
   ],
   providers: [

@@ -37,18 +37,22 @@ export class ProductsService {
   }
 
   getProducts(): Observable<Product[]> {
-    const options = {
-      params: new HttpParams()
-        .set('limit', 10)
-        .set('page', 1),
-      headers: new HttpHeaders({ Authorization: 'myToken' })
-    };
+    if (this.products.length === 0) {
+      const options = {
+        params: new HttpParams()
+          .set('limit', 10)
+          .set('page', 1),
+        headers: new HttpHeaders({ Authorization: 'myToken' })
+      };
 
-    return this.http.get<Product[]>(this.productsUrl, options)
-      .pipe(map(products => {
-        this.products = products;
-        return products;
-      }));
+      return this.http.get<Product[]>(this.productsUrl, options)
+        .pipe(map(products => {
+          this.products = products;
+          return products;
+        }));
+    }
+
+    return of(this.products);
   }
 
   updateProduct(id: number, price: number): Observable<Product> {
