@@ -71,6 +71,10 @@
   transition: fill 0.3s ease;
 }
 
+.menu-links a.active {
+  color: var(--electric-violet);
+}
+
 .menu-links a:hover {
   color: var(--gray-900);
 }

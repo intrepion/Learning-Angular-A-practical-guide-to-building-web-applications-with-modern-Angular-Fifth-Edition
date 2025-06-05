@@ -2,7 +2,11 @@ import {
   Component,
   inject,
 } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import {
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import { APP_SETTINGS } from './app.settings';
 import { AuthComponent } from './auth/auth.component';
 import { CopyrightDirective } from './copyright.directive';
@@ -15,6 +19,7 @@ import { KeyLoggerComponent } from './key-logger/key-logger.component';
     CopyrightDirective,
     KeyLoggerComponent,
     RouterLink,
+    RouterLinkActive,
     RouterOutlet,
   ],
   templateUrl: './app.component.html',
