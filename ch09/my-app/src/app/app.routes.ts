@@ -7,4 +7,6 @@ export const routes: Routes = [
   { path: 'products/new', component: ProductCreateComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'cart', component: CartComponent },
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  { path: '**', redirectTo: 'products' },
 ];
