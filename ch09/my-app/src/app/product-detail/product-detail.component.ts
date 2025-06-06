@@ -29,7 +29,7 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
   
   deleted = output();
 
-  id = input<number>();
+  id = input<string>();
 
   product$: Observable<Product> | undefined;
 
@@ -53,11 +53,7 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.product$ = this.route.paramMap.pipe(
-      switchMap(params => {
-        return this.productService.getProduct(Number(params.get('id')));
-      })
-    );
+    this.product$ = this.productService.getProduct(Number(this.id()!));
   }
 
   remove(product: Product) {
