@@ -5,6 +5,7 @@ import { ProductCreateComponent } from './product-create/product-create.componen
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { checkoutGuard } from './checkout.guard';
+import { productsResolver } from './products.resolver';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,9 @@ export const routes: Routes = [
   {
     component: ProductListComponent,
     path: 'products',
+    resolve: {
+      products: productsResolver,
+    },
   },
   {
     canActivate: [authGuard],
