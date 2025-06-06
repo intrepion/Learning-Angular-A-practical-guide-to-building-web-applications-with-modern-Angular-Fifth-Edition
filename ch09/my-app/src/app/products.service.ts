@@ -43,11 +43,15 @@ export class ProductsService {
     );
   }
 
-  getProducts(): Observable<Product[]> {
+  getProducts(limit?: number): Observable<Product[]> {
+    if (this.products.length > 0 && limit !== undefined) {
+      this.products = [];
+    }
+
     if (this.products.length === 0) {
       const options = {
         params: new HttpParams()
-          .set('limit', 10)
+          .set('limit', limit || 10)
           .set('page', 1),
         headers: new HttpHeaders({ Authorization: 'myToken' })
       };
@@ -55,11 +59,11 @@ export class ProductsService {
       return this.http.get<Product[]>(this.productsUrl, options)
         .pipe(map(products => {
           this.products = products;
-          return products;
+          return limit ? products.slice(0, limit) : products;
         }));
     }
 
-    return of(this.products);
+    return of(limit ? this.products.slice(0, limit) : this.products);
   }
 
   updateProduct(id: number, price: number): Observable<Product> {

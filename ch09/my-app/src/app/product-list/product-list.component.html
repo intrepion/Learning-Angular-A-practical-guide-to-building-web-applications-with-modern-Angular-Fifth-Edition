@@ -1,5 +1,5 @@
 <div class="caption">
-  <h1>{{products().length}} Products</h1>
+  <h1>{{(products$ | async)?.length}} Products</h1>
   <a routerLink="new">
     <svg
       width="24"
@@ -16,7 +16,7 @@
 </div>
 
 <ul class="pill-group">
-  @for (product of products() | sort; track product.id; let i = $index) {
+  @for (product of ((products$ | async) || []) | sort; track product.id; let i = $index) {
     <li class="pill" (click)="selectedProduct = product">
       <app-product-view [id]="product.id"></app-product-view>
       <a [routerLink]="[product.id]">{{product.title}}</a>

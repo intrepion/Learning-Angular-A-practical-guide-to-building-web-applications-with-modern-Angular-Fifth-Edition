@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, inject, OnDestroy, OnInit, viewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AfterViewInit, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { RouterLink } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Observable, Subscription, switchMap } from 'rxjs';
 import { FavoritesComponent } from '../favorites/favorites.component';
 import { Product } from '../product';
 import { ProductViewComponent } from '../product-view/product-view.component';
@@ -10,6 +11,7 @@ import { SortPipe } from '../sort.pipe';
 
 @Component({
   imports: [
+    CommonModule,
     FavoritesComponent,
     ProductViewComponent,
     RouterLink,
@@ -30,14 +32,19 @@ export class ProductListComponent implements AfterViewInit, OnDestroy, OnInit {
 
   products$: Observable<Product[]> | undefined;
 
-  private productService = inject(ProductsService);
-
   private productsSub: Subscription | undefined;
 
   selectedProduct: Product | undefined;
 
+  constructor(private productService: ProductsService, private route: ActivatedRoute) {}
+
   private getProducts() {
-    this.products$ = this.productService.getProducts();
+    this.products$ = this.route.queryParamMap.pipe(
+      switchMap(params => {
+        const limit = params.get('limit');
+        return this.productService.getProducts(limit ? Number(limit) : 10);
+      })
+    );
   }
 
   ngAfterViewInit(): void {
