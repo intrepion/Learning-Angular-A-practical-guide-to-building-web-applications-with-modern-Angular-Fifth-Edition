@@ -9,6 +9,10 @@ import { productsResolver } from './products.resolver';
 
 export const routes: Routes = [
   {
+    path: 'user',
+    loadChildren: () => import('./user.routes'),
+  },
+  {
     component: ProductCreateComponent,
     path: 'products/new',
   },
