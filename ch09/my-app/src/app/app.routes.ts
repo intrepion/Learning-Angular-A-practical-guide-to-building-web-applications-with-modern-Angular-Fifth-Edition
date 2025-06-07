@@ -9,6 +9,7 @@ import { productsResolver } from './products.resolver';
 
 export const routes: Routes = [
   {
+    canMatch: [authGuard],
     path: 'user',
     loadChildren: () => import('./user.routes'),
   },
