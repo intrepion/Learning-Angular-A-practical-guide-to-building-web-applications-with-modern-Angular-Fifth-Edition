@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { CartService } from '../cart.service';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
 
@@ -40,9 +41,11 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
     private productService: ProductsService,
     public authService: AuthService,
     private router: Router,
+    private cartService: CartService
   ) { }
 
-  addToCart() {
+  addToCart(id: number) {
+    this.cartService.addProduct(id).subscribe();
   }
 
   changePrice(product: Product) {
