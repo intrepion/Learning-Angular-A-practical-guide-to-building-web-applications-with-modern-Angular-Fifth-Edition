@@ -7,15 +7,16 @@ import {
   OnInit,
   output,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, CurrencyPipe],
+  imports: [CommonModule, CurrencyPipe, FormsModule],
     providers: [
     { provide: ProductsService, useClass: ProductsService },
   ],
@@ -31,22 +32,24 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
 
   id = input<string>();
 
+  price: number | undefined;
+
   product$: Observable<Product> | undefined;
 
   constructor(
     private productService: ProductsService,
     public authService: AuthService,
-    private route: ActivatedRoute,
     private router: Router,
   ) { }
 
   addToCart() {
   }
 
-  changePrice(product: Product, price: string) {
-    this.productService.updateProduct(product.id, Number(price)).subscribe(() => {
-      this.router.navigate(['/products']);
-    });
+  changePrice(product: Product) {
+    this.productService.updateProduct(
+      product.id,
+      this.price!
+    ).subscribe(() => this.router.navigate(['/products']));
   }
 
   ngOnDestroy(): void {
