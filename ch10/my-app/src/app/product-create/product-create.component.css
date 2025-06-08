@@ -6,11 +6,6 @@ input {
   width: 200px;
 }
 
-label {
-  display: block;
-  margin-bottom: 4px;
-}
-
 select {
   border: 1px solid #BDBDBD;
   border-radius: 4px;
