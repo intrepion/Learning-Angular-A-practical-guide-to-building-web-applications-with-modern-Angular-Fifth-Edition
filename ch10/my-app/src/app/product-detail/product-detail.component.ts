@@ -14,11 +14,17 @@ import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
+import { PriceMaximumDirective } from '../price-maximum.directive';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, CurrencyPipe, FormsModule],
-    providers: [
+  imports: [
+    CommonModule,
+    CurrencyPipe,
+    FormsModule,
+    PriceMaximumDirective,
+  ],
+  providers: [
     { provide: ProductsService, useClass: ProductsService },
   ],
   selector: 'app-product-detail',

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { priceMaximumValidator } from '../price-maximum.validator';
 import { ProductsService } from '../products.service';
 
 @Component({
@@ -21,7 +22,11 @@ export class ProductCreateComponent implements OnInit{
     }),
     price: new FormControl<number | undefined>(undefined, {
       nonNullable: true,
-      validators: [Validators.required, Validators.min(1)]
+      validators: [
+        Validators.required,
+        Validators.min(1),
+        priceMaximumValidator(1000),
+      ]
     }),
     category: new FormControl('', { nonNullable: true })
   });
@@ -34,8 +39,10 @@ export class ProductCreateComponent implements OnInit{
 
   private buildForm() {
     this.productForm = this.builder.nonNullable.group({
-      title: [''],
-      price: this.builder.nonNullable.control<number | undefined>(undefined),
+      title: ['', Validators.required],
+      price: this.builder.nonNullable.control<number | undefined>(undefined, {
+        validators: [Validators.required, Validators.min(1), priceMaximumValidator(1000)]
+      }),
       category: ['']
     });
   }
