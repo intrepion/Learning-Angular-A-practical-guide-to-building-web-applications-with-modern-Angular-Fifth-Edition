@@ -1,6 +1,6 @@
 <h1>Add new product</h1>
 
-<form [formGroup]="productForm" (ngSubmit)="createProduct()">
+<form [formGroup]="productForm!" (ngSubmit)="createProduct()">
   <div>
     <label for="title">Title</label>
     <input #title formControlName="title" id="title" />
