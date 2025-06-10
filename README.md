@@ -16,3 +16,7 @@ Chapter 07 [![Node.js CI](https://github.com/intrepion/Learning-Angular-A-practi
 Chapter 08 [![Node.js CI](https://github.com/intrepion/Learning-Angular-A-practical-guide-to-building-web-applications-with-modern-Angular-Fifth-Edition/actions/workflows/ch08.yml/badge.svg?branch=main)](https://github.com/intrepion/Learning-Angular-A-practical-guide-to-building-web-applications-with-modern-Angular-Fifth-Edition/actions/workflows/ch08.yml)
 
 Chapter 09 [![Node.js CI](https://github.com/intrepion/Learning-Angular-A-practical-guide-to-building-web-applications-with-modern-Angular-Fifth-Edition/actions/workflows/ch09.yml/badge.svg?branch=main)](https://github.com/intrepion/Learning-Angular-A-practical-guide-to-building-web-applications-with-modern-Angular-Fifth-Edition/actions/workflows/ch09.yml)
+
+Chapter 10 [![Node.js CI](https://github.com/intrepion/Learning-Angular-A-practical-guide-to-building-web-applications-with-modern-Angular-Fifth-Edition/actions/workflows/ch10.yml/badge.svg?branch=main)](https://github.com/intrepion/Learning-Angular-A-practical-guide-to-building-web-applications-with-modern-Angular-Fifth-Edition/actions/workflows/ch10.yml)
+
+Chapter 11 [![Node.js CI](https://github.com/intrepion/Learning-Angular-A-practical-guide-to-building-web-applications-with-modern-Angular-Fifth-Edition/actions/workflows/ch11.yml/badge.svg?branch=main)](https://github.com/intrepion/Learning-Angular-A-practical-guide-to-building-web-applications-with-modern-Angular-Fifth-Edition/actions/workflows/ch11.yml)
