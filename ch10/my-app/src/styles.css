@@ -53,11 +53,11 @@ input {
   margin-bottom: 16px;
 }
 
-input.invalid {
+input.invalid, input.ng-dirty.ng-invalid {
   border: solid red;
 }
 
-input.valid {
+input.valid, input.ng-dirty.ng-valid {
   border: solid green;
 }
 
