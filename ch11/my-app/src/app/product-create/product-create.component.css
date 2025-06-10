@@ -1,0 +1,15 @@
+:host {
+  width: 400px;
+}
+
+input {
+  width: 200px;
+}
+
+select {
+  border: 1px solid #BDBDBD;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  padding: 8px;
+  width: 220px;
+}
