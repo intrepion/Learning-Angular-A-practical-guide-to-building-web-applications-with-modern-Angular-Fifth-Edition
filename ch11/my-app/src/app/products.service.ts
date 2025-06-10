@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, retry, tap, throwError } from 'rxjs';
 import { APP_SETTINGS } from './app.settings';
 import { Product } from './product';
 
@@ -17,6 +17,7 @@ export class ProductsService {
     return this.http.post<Product>(this.productsUrl, newProduct).pipe(
       map(product => {
         this.products.push(product);
+
         return product;
       })
     );
@@ -36,6 +37,7 @@ export class ProductsService {
     if (product) {
       return of(product);
     }
+
     return this.http.get<Product>(`${this.productsUrl}/${id}`).pipe(
       tap(product => {
         this.products.push(product);
@@ -44,26 +46,44 @@ export class ProductsService {
   }
 
   getProducts(limit?: number): Observable<Product[]> {
-    if (this.products.length > 0 && limit !== undefined) {
-      this.products = [];
-    }
-
     if (this.products.length === 0) {
-      const options = {
-        params: new HttpParams()
-          .set('limit', limit || 10)
-          .set('page', 1),
-        headers: new HttpHeaders({ Authorization: 'myToken' })
-      };
+      const options = new HttpParams().set('limit', limit || 10);
 
-      return this.http.get<Product[]>(this.productsUrl, options)
-        .pipe(map(products => {
+      return this.http.get<Product[]>(this.productsUrl, {
+        params: options
+      }).pipe(
+        map(products => {
           this.products = products;
-          return limit ? products.slice(0, limit) : products;
-        }));
+  
+          return products;
+        }),
+        retry(2),
+        catchError(this.handleError)
+      );
+    }
+  
+    return of(this.products);
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let message = '';
+    switch(error.status) {
+      case 0:
+        message = 'Client error';
+        break;
+      case HttpStatusCode.InternalServerError:
+        message = 'Server error';
+        break;
+      case HttpStatusCode.BadRequest:
+        message = 'Request error';
+        break;
+      default:
+        message = 'Unknown error';
     }
 
-    return of(limit ? this.products.slice(0, limit) : this.products);
+    console.error(message, error.error);
+
+    return throwError(() => error);
   }
 
   updateProduct(id: number, price: number): Observable<Product> {
@@ -73,6 +93,7 @@ export class ProductsService {
       map(product => {
         const index = this.products.findIndex(p => p.id === id);
         this.products[index].price = price;
+
         return product;
       })
     );
