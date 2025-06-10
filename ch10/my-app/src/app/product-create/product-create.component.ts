@@ -54,6 +54,8 @@ export class ProductCreateComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.buildForm();
+    this.productForm.controls.category.valueChanges.subscribe(() => {
+      this.productForm.controls.price.reset();
+    });
   }
 }
