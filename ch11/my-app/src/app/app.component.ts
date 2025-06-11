@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   inject,
 } from '@angular/core';
@@ -26,6 +27,12 @@ import { KeyLoggerComponent } from './key-logger/key-logger.component';
   styleUrl: './app.component.css',
 })
 
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   settings = inject(APP_SETTINGS);
+
+  title = '';
+
+  ngAfterViewInit(): void {
+    this.title = this.settings.title;
+  }
 }
