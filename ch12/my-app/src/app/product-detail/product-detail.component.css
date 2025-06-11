@@ -2,11 +2,21 @@
   width: 450px;
 }
 
-.button-group {
-  align-items: start;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+button.delete {
+  color: brown;
+  display: inline;
+  margin-left: 5px;
+}
+
+button.secondary {
+  display: inline;
+  margin-left: 5px;
+}
+
+div {
+  border: 2px dashed;
+  padding-block: 0.375rem;
+  padding-inline: 0.75rem;
 }
 
 .pill {
@@ -35,22 +45,4 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1.25rem;
-}
-
-button.delete {
-  --button-accent: var(--hot-red);
-  display: inline;
-  margin-left: 5px;
-}
-
-button.secondary {
-  --button-accent: var(--vivid-pink);
-  display: inline;
-  margin-left: 5px;
-}
-
-div {
-  border: 2px dashed;
-  padding-block: 0.375rem;
-  padding-inline: 0.75rem;
 }

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { AuthService } from '../auth.service';
 
 @Component({
+  imports: [MatButton],
   selector: 'app-auth',
-  imports: [],
+  styleUrl: './auth.component.css',
   templateUrl: './auth.component.html',
-  styleUrl: './auth.component.css'
 })
 export class AuthComponent {
   constructor(public authService: AuthService) {}
