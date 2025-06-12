@@ -7,31 +7,35 @@
     </p>
     <p>{{product.price | currency:'EUR'}}</p>
     <form #priceForm="ngForm" (ngSubmit)="changePrice(product)">
-      <input
-        #price
-        #priceCtrl="ngModel"
-        [(ngModel)]="price"
-        appPriceMaximum threshold="500"
-        min="1"
-        name="price"
-        placeholder="New price"
-        required
-        type="number"
-      />
-      <button
-        mat-stroked-button
-        [disabled]="!priceCtrl.dirty || priceForm.invalid"
-        class="secondary"
-        type="submit"
-      >
-        Change
-      </button>
-      @if (priceCtrl.dirty && (priceCtrl.invalid || priceCtrl.hasError('min'))) {
-        <span class="help-text">Please enter a valid price</span>
-      }
-      @if (priceCtrl.dirty && priceCtrl.hasError('priceMaximum')) {
-        <span class="help-text">Price must be smaller or equal to 500</span>
-      }
+      <mat-form-field>
+        <input
+          #price
+          #priceCtrl="ngModel"
+          [(ngModel)]="price"
+          appPriceMaximum threshold="500"
+          matInput
+          min="1"
+          name="price"
+          placeholder="New price"
+          required
+          type="number"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          [disabled]="!priceCtrl.dirty || priceForm.invalid"
+          class="secondary"
+          type="submit"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        @if (priceCtrl.dirty && (priceCtrl.invalid || priceCtrl.hasError('min'))) {
+          <mat-error>Please enter a valid price</mat-error>
+        }
+        @if (priceCtrl.dirty && priceCtrl.hasError('priceMaximum')) {
+          <mat-error>Price must be smaller or equal to 500</mat-error>
+        }
+      </mat-form-field>
     </form>
     <div class="pill-group">
       <p class="pill">{{ product.category }}</p>

@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
+import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { priceMaximumValidator } from '../price-maximum.validator';
 import { ProductsService } from '../products.service';
 
 @Component({
-  imports: [MatButton, ReactiveFormsModule],
+  imports: [
+    MatButton,
+    MatError,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    ReactiveFormsModule
+  ],
   providers: [
     { provide: ProductsService, useClass: ProductsService },
   ],

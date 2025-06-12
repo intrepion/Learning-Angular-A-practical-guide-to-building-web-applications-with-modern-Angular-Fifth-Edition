@@ -8,6 +8,9 @@ import {
   output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatError, MatFormField, MatInput, MatSuffix } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
@@ -15,7 +18,6 @@ import { CartService } from '../cart.service';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
 import { PriceMaximumDirective } from '../price-maximum.directive';
-import { MatButton } from '@angular/material/button';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,6 +26,12 @@ import { MatButton } from '@angular/material/button';
     CurrencyPipe,
     FormsModule,
     MatButton,
+    MatError,
+    MatFormField,
+    MatIcon,
+    MatIconButton,
+    MatInput,
+    MatSuffix,
     PriceMaximumDirective,
   ],
   providers: [
