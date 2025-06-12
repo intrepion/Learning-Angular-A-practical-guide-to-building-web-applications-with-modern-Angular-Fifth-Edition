@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
 import { MatError, MatFormField, MatInput, MatSuffix } from '@angular/material/input';
 import { Router } from '@angular/router';
@@ -26,6 +27,8 @@ import { PriceMaximumDirective } from '../price-maximum.directive';
     CurrencyPipe,
     FormsModule,
     MatButton,
+    MatChip,
+    MatChipSet,
     MatError,
     MatFormField,
     MatIcon,
