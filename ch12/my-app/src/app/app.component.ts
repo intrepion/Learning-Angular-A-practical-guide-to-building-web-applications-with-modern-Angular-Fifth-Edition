@@ -3,17 +3,18 @@ import {
   Component,
   inject,
 } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
+import { MatBadge } from '@angular/material/badge';
 import {
   RouterLink,
-  RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
 import { APP_SETTINGS } from './app.settings';
 import { AuthComponent } from './auth/auth.component';
+import { CartService } from './cart.service';
 import { CopyrightDirective } from './copyright.directive';
 import { KeyLoggerComponent } from './key-logger/key-logger.component';
-import { MatButton } from '@angular/material/button';
-import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',
@@ -21,11 +22,11 @@ import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
     AuthComponent,
     CopyrightDirective,
     KeyLoggerComponent,
+    MatBadge,
     MatButton,
     MatToolbar,
     MatToolbarRow,
     RouterLink,
-    RouterLinkActive,
     RouterOutlet,
   ],
   templateUrl: './app.component.html',
@@ -33,6 +34,8 @@ import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 })
 
 export class AppComponent implements AfterViewInit {
+  cartService = inject(CartService);
+
   settings = inject(APP_SETTINGS);
 
   title = '';

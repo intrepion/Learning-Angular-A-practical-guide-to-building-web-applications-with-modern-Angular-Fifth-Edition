@@ -60,6 +60,10 @@
   width: 1px;
 }
 
+button {
+  margin: 5px;
+}
+
 main {
   align-items: center;
   box-sizing: inherit;
