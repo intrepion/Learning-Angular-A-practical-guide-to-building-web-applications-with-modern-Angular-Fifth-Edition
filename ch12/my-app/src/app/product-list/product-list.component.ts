@@ -8,11 +8,15 @@ import { Product } from '../product';
 import { ProductViewComponent } from '../product-view/product-view.component';
 import { ProductsService } from '../products.service';
 import { SortPipe } from '../sort.pipe';
+import { MatMiniFabButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   imports: [
     CommonModule,
     FavoritesComponent,
+    MatIcon,
+    MatMiniFabButton,
     ProductViewComponent,
     RouterLink,
     SortPipe,

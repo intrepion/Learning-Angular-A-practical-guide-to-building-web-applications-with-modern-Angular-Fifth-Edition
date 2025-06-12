@@ -19,6 +19,7 @@
         type="number"
       />
       <button
+        mat-stroked-button
         [disabled]="!priceCtrl.dirty || priceForm.invalid"
         class="secondary"
         type="submit"
@@ -37,9 +38,20 @@
     </div>
     <div class="button-group">
       @if (authService.isLoggedIn()) {
-        <button (click)="addToCart(product.id)">Add to cart</button>
+        <button
+          mat-raised-button
+          (click)="addToCart(product.id)"
+        >
+          Add to cart
+        </button>
       }
-      <button class="delete" (click)="remove(product)">Delete</button>
+      <button
+        mat-raised-button
+        class="delete"
+        (click)="remove(product)"
+      >
+        Delete
+      </button>
     </div>
   </div>
 }

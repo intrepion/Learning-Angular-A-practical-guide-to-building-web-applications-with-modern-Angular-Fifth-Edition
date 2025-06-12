@@ -15,6 +15,7 @@ import { CartService } from '../cart.service';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
 import { PriceMaximumDirective } from '../price-maximum.directive';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,6 +23,7 @@ import { PriceMaximumDirective } from '../price-maximum.directive';
     CommonModule,
     CurrencyPipe,
     FormsModule,
+    MatButton,
     PriceMaximumDirective,
   ],
   providers: [
