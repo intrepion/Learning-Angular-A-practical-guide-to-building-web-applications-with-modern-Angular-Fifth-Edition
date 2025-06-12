@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { MatMiniFabButton } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, of, Subscription, switchMap } from 'rxjs';
 import { FavoritesComponent } from '../favorites/favorites.component';
@@ -8,13 +11,12 @@ import { Product } from '../product';
 import { ProductViewComponent } from '../product-view/product-view.component';
 import { ProductsService } from '../products.service';
 import { SortPipe } from '../sort.pipe';
-import { MatMiniFabButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
 
 @Component({
   imports: [
     CommonModule,
     FavoritesComponent,
+    MatCardModule,
     MatIcon,
     MatMiniFabButton,
     ProductViewComponent,
