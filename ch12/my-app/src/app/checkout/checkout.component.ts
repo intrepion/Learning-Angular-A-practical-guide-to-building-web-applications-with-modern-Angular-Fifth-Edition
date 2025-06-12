@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   imports: [MatButton, MatDialogModule],
@@ -10,5 +10,5 @@ import { MatDialogModule } from '@angular/material/dialog';
 })
 
 export class CheckoutComponent {
-
+  data = inject(MAT_DIALOG_DATA);
 }

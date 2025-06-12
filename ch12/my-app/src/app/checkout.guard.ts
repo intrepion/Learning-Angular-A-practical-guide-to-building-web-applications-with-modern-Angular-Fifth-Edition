@@ -11,7 +11,10 @@ export const checkoutGuard: CanDeactivateFn<CartComponent> = () => {
   const dialog = inject(MatDialog);
 
   if (cartService.cart) {
-    const confirmation = dialog.open(CheckoutComponent).afterClosed();
+    const confirmation = dialog.open(
+      CheckoutComponent,
+      { data: cartService.cart.products.length }
+    ).afterClosed();
 
     return confirmation;
   }
