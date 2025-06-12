@@ -12,13 +12,14 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
 import { MatError, MatFormField, MatInput, MatSuffix } from '@angular/material/input';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, switchMap } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
 import { PriceMaximumDirective } from '../price-maximum.directive';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,6 +35,7 @@ import { PriceMaximumDirective } from '../price-maximum.directive';
     MatIcon,
     MatIconButton,
     MatInput,
+    MatSnackBarModule,
     MatSuffix,
     PriceMaximumDirective,
   ],
@@ -57,14 +59,20 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
   product$: Observable<Product> | undefined;
 
   constructor(
-    private productService: ProductsService,
     public authService: AuthService,
+    private cartService: CartService,
+    private productService: ProductsService,
+    private route: ActivatedRoute,
     private router: Router,
-    private cartService: CartService
+    private snackbar: MatSnackBar,
   ) { }
 
   addToCart(id: number) {
-    this.cartService.addProduct(id).subscribe();
+    this.cartService.addProduct(id).subscribe(() => {
+      this.snackbar.open('Product added to cart!', undefined, {
+        duration: 1000
+      });
+    });
   }
 
   changePrice(product: Product) {
@@ -78,7 +86,11 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.product$ = this.productService.getProduct(Number(this.id()!));
+    this.product$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        return this.productService.getProduct(Number(params.get('id')));
+      })
+    );
   }
 
   remove(product: Product) {
