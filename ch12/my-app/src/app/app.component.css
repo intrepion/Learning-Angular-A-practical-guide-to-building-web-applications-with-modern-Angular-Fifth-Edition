@@ -60,34 +60,6 @@
   width: 1px;
 }
 
-.menu-links {
-  align-items: center;
-  display: flex;
-  gap: 0.73rem;
-}
-
-.menu-links a {
-  color: var(--gray-400);
-  transition: fill 0.3s ease;
-}
-
-.menu-links a.active {
-  color: var(--electric-violet);
-}
-
-.menu-links a:hover {
-  color: var(--gray-900);
-}
-
-
-header {
-  display: flex;
-  flex-direction: row;
-  gap: 0.73rem;
-  justify-content: end;
-  margin-top: 1.5rem;
-}
-
 main {
   align-items: center;
   box-sizing: inherit;

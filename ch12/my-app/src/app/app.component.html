@@ -1,12 +1,14 @@
 <header>
-  <h2>{{ settings.title }}</h2>
-  <span class="spacer"></span>
-  <div class="menu-links">
-    <a routerLink="/products" routerLinkActive="active">Products</a>
-    <a routerLink="/cart" routerLinkActive="active">My Cart</a>
-    <a routerLink="/user" routerLinkActive="active">My Profile</a>
-  </div>
-  <app-auth />
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <h2>{{ settings.title }}</h2>
+      <span class="spacer"></span>
+      <button mat-button routerLink="/products">Products</button>
+      <button mat-button routerLink="/cart">My Cart</button>
+      <button mat-button routerLink="/user">My Profile</button>
+      <app-auth></app-auth>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </header>
 
 <main class="main">
@@ -15,6 +17,12 @@
   </div>
 </main>
 
-<footer appCopyright> - v{{ settings.version }}</footer>
+<footer>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <span appCopyright> - v{{ settings.version }}</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</footer>
 
 <app-key-logger [numeric]="true" />

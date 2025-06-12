@@ -12,6 +12,8 @@ import { APP_SETTINGS } from './app.settings';
 import { AuthComponent } from './auth/auth.component';
 import { CopyrightDirective } from './copyright.directive';
 import { KeyLoggerComponent } from './key-logger/key-logger.component';
+import { MatButton } from '@angular/material/button';
+import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +21,9 @@ import { KeyLoggerComponent } from './key-logger/key-logger.component';
     AuthComponent,
     CopyrightDirective,
     KeyLoggerComponent,
+    MatButton,
+    MatToolbar,
+    MatToolbarRow,
     RouterLink,
     RouterLinkActive,
     RouterOutlet,
