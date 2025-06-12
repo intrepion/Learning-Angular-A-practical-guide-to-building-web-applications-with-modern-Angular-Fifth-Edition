@@ -19,15 +19,14 @@
       <mat-error>Price must be smaller or equal to 1000</mat-error>
     }
   </mat-form-field>
-  <div>
-    <label for="category">Category</label>
-    <select #category formControlName="category" id="category">
-      <option>Select a category</option>
-      <option value="electronics">Electronics</option>
-      <option value="jewelery">Jewelery</option>
-      <option>Other</option>
-    </select>
-  </div>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category">
+      <mat-option value="electronics">Electronics</mat-option>
+      <mat-option value="jewelery">Jewelery</mat-option>
+      <mat-option>Other</mat-option>
+    </mat-select>
+  </mat-form-field>
   <div>
     <button
       mat-raised-button

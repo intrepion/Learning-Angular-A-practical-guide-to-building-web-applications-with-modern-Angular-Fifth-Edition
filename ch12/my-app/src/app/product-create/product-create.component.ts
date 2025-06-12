@@ -5,6 +5,8 @@ import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/in
 import { Router } from '@angular/router';
 import { priceMaximumValidator } from '../price-maximum.validator';
 import { ProductsService } from '../products.service';
+import { MatOption } from '@angular/material/autocomplete';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   imports: [
@@ -13,6 +15,8 @@ import { ProductsService } from '../products.service';
     MatFormField,
     MatInput,
     MatLabel,
+    MatOption,
+    MatSelect,
     ReactiveFormsModule
   ],
   providers: [
