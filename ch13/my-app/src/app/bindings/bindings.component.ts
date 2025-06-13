@@ -1,7 +1,8 @@
 import { Component, input, output } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  imports: [],
+  imports: [MatButton],
   selector: 'app-bindings',
   styleUrl: './bindings.component.css',
   templateUrl: './bindings.component.html',

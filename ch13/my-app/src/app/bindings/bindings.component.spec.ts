@@ -1,5 +1,7 @@
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
 import { By } from '@angular/platform-browser';
 import { BindingsComponent } from './bindings.component';
 
@@ -7,6 +9,7 @@ import { BindingsComponent } from './bindings.component';
   imports: [BindingsComponent],
   template: `<app-bindings [title]="testTitle" (liked)="isFavorite = true"></app-bindings>`
 })
+
 export class TestHostComponent {
   testTitle = 'My title';
   isFavorite = false;
@@ -47,6 +50,13 @@ describe('BindingsComponent', () => {
   it('should emit the liked event using debugElement', () => {
     const buttonDe = fixture.debugElement.query(By.css('button'));
     buttonDe.triggerEventHandler('click');
+    expect(component.isFavorite).toBeTrue();
+  });
+
+  it('should emit the liked event using harness', async () => {
+    const loader = TestbedHarnessEnvironment.loader(fixture);
+    const buttonHarness = await loader.getHarness(MatButtonHarness);
+    await buttonHarness.click();
     expect(component.isFavorite).toBeTrue();
   });
 });
