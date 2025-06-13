@@ -1,1 +1,3 @@
-<p>async works!</p>
+@for(item of items$ | async; track item) {
+  <p>{{ item }}</p>
+}
