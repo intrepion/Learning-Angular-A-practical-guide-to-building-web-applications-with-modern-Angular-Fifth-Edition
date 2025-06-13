@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
-  selector: 'app-bindings',
   imports: [],
+  selector: 'app-bindings',
+  styleUrl: './bindings.component.css',
   templateUrl: './bindings.component.html',
-  styleUrl: './bindings.component.css'
 })
-export class BindingsComponent {
 
+export class BindingsComponent {
+  title = input('');
+  liked = output();
 }
